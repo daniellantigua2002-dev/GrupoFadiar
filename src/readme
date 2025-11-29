@@ -1,2 +1,24 @@
-//Quitar el scroll de ProductPage y poner resposnsive los ultimos 5 elementos
-// Darle funcionalidad al los filtros 
+
+
+
+Faltante
+
+-Implementar la funcionalidad completa del carrito de compras (actualmente solo muestra el conteo de productos).
+
+-Se integro correctamente Fuse.js usando threshold: 0.3 para mejorar la precisión de búsqueda.
+
+-Actualizar las llamadas a la API con la API real, * Últimos productos *Más vendidos
+
+-Corregir los filtros de Categorías y Marcas, ya que algunos no coinciden con la API actual.
+
+-Implementar la funcionalidad del filtro "Más relevantes", ya que no estaba disponible en la API.
+
+-Implementar la página ContactPage.
+
+-Completar la lógica de Login, mantener el estado de usuario autenticado y cargar correctamente sus datos en ProfilePage las rutas de autenticacion estan creadas .
+
+ Recomendaciones
+
+Mejorar el diseño de los filtros en la página de productos muy recomendado .
+
+Optimizar el diseño responsive de toda la web probándola en más dispositivos y tamaños de pantalla altamente recomendado.

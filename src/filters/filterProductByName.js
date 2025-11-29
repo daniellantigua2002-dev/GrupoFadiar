@@ -6,7 +6,7 @@ export const filterProductsByName = (listProducts, nameFilter) => {
 
     const fuse = new Fuse(listProducts, {
         keys: ["name"],     // ¿En qué campos buscar?
-        threshold: 0.3,     // Precisión de coincidencia (0 = exacto, 1 = muy permisivo)
+        threshold: 0.3,     // Precisión de coincidencia
         includeScore: true, // Incluye puntuación para ordenar por relevancia
     });
 

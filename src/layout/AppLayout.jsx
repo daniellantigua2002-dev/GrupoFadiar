@@ -34,9 +34,9 @@
 
 // src/layout/AppLayout.jsx
 
-import React from 'react';
-import { Outlet } from 'react-router-dom'; // 👈 Importar Outlet
-import { Footer, NavBar, ScrollToTopButton } from "../components"; // Asumo esta ruta
+
+import { Outlet } from 'react-router-dom';
+import { Footer, NavBar, ScrollToTopButton } from "../components"; 
 
 export const AppLayout = () => {
     return (

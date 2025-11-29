@@ -4,3 +4,5 @@ export * from "./FaqPage";
 export * from "./HomePage";
 export * from "./ProductsPage";
 export * from "./ProductdetailPage";
+export * from "./ProfilePage";
+
