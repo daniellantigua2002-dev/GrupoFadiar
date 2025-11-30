@@ -1,10 +1,11 @@
 
 
 
-// GridRelacionados.jsx
 import { Box, Typography, Pagination, useTheme } from "@mui/material";
 import { useState, useMemo } from "react";
 import { ProductCard } from "./ProductCard";
+
+import { MIN_CARD_WIDTH } from '../../utils/breakpoints';
 
 export const GridRelacionados = ({ products = [] }) => {
     const theme = useTheme();
@@ -23,9 +24,12 @@ export const GridRelacionados = ({ products = [] }) => {
         [products, page]
     );
 
+
+    const allProducts = products;
+
     const handleChangePage = (event, value) => {
         setPage(value);
-        // ❌ Ya NO hace scroll
+
     };
 
     return (
@@ -33,12 +37,11 @@ export const GridRelacionados = ({ products = [] }) => {
             sx={{
                 width: "100%",
                 maxWidth: "100%",
-                overflowX: "hidden",
                 px: { xs: 2, md: 4 },
                 py: 2,
             }}
         >
-            {/* TÍTULO PRINCIPAL */}
+
             <Typography
                 variant="h5"
                 fontWeight={700}
@@ -51,7 +54,6 @@ export const GridRelacionados = ({ products = [] }) => {
                 También le puede interesar
             </Typography>
 
-            {/* SUBTÍTULO */}
             <Typography
                 variant="h6"
                 fontWeight={700}
@@ -64,33 +66,58 @@ export const GridRelacionados = ({ products = [] }) => {
                 Productos Relacionados
             </Typography>
 
-            {/* GRID DE PRODUCTOS */}
+
             <Box
                 sx={{
-                    display: "grid",
-                    gap: 2,
+
+                    display: { xs: "flex", sm: "grid" },
+
+
+                    overflowX: { xs: "scroll", sm: "visible" },
+                    overflowY: "hidden",
+
+                    flexWrap: { xs: "nowrap", sm: "wrap" },
+
+
+                    "&::-webkit-scrollbar": { display: "none" },
+                    msOverflowStyle: "none",
+
+
+                    gap: { xs: 2, sm: 2 },
+
                     width: "100%",
                     maxWidth: "100%",
                     minWidth: 0,
+
+
                     gridTemplateColumns: {
-                        xs: "repeat(2, minmax(0, 1fr))",
-                        sm: "repeat(2, minmax(0, 1fr))",
-                        md: "repeat(5, minmax(0, 1fr))",
+                        xs: "none",
+                        sm: `repeat(auto-fit, minmax(${MIN_CARD_WIDTH}px, 1fr))`,
                     },
                 }}
             >
-                {productsPaginated.map((product) => (
-                    <Box key={product.id} sx={{ minWidth: 0 }}>
+
+                {(window.innerWidth < theme.breakpoints.values.sm ? allProducts : productsPaginated).map((product) => (
+                    <Box
+                        key={product.id}
+                        sx={{
+
+                            flexShrink: { xs: 0, sm: 1 },
+                            minWidth: { xs: MIN_CARD_WIDTH, sm: 'auto' },
+                            maxWidth: { xs: MIN_CARD_WIDTH, sm: 'auto' },
+                        }}
+                    >
                         <ProductCard product={product} />
                     </Box>
                 ))}
             </Box>
 
-            {/* PAGINACIÓN */}
+          
             {pageCount > 1 && (
                 <Box
                     sx={{
-                        display: "flex",
+                     
+                        display: { xs: "none", sm: "flex" },
                         justifyContent: "center",
                         mt: 3,
                         mb: 2,
@@ -110,4 +137,3 @@ export const GridRelacionados = ({ products = [] }) => {
         </Box>
     );
 };
-

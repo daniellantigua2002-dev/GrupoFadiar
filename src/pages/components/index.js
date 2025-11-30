@@ -12,3 +12,4 @@ export * from "./StatsCards";
 export * from "./AppDownloadSection";
 export * from "./GridRecientes";
 export * from "./ComingSoonBanner";
+export * from "./SortFilter";

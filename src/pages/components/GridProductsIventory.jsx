@@ -1,77 +1,33 @@
 
-// import { Box } from "@mui/material";
-// import { ProductCard } from "./ProductCard";
 
-// export const GridProductsInventory = ({ products = [] }) => {
-//     return (
-//         <Box sx={{ px: 3, py: 2 }}>
-
-//             <Box
-//                 sx={{
-//                     display: { xs: "flex", sm: "grid" },
-//                     overflowX: { xs: "scroll", sm: "visible" },
-//                     WebkitOverflowScrolling: "touch",
-//                     gap: 1, 
-               
-//                     gridTemplateColumns: {
-//                         sm: "repeat(2, 1fr)",
-//                         md: "repeat(4, 1fr)",
-//                     },
-
-//                     pb: { xs: 2, sm: 0 },
-//                 }}
-//             >
-//                 {products.map((product) => (
-//                     <Box
-//                         key={product.id}
-//                         sx={{
-//                             flex: { xs: "0 0 80%", sm: "none" },
-//                             minWidth: { xs: "80%", sm: "auto" },
-//                             minHeight: { sm: '400px', md: '450px' },
-//                         }}
-//                     >
-//                         <ProductCard product={product} />
-//                     </Box>
-//                 ))}
-//             </Box>
-
-//         </Box>
-//     );
-// };
-
-
-// GridProductsInventory.jsx (MODIFICADO)
+// GridProductsInventory.jsx
 import { Box } from "@mui/material";
 import { ProductCard } from "./ProductCard";
 
+import { MIN_CARD_WIDTH } from '../../utils/breakpoints';
+
 export const GridProductsInventory = ({ products = [] }) => {
     return (
-        // El px: 3, py: 2 en el contenedor exterior ya está bien para el padding.
-        <Box sx={{ px: 3, py: 2 }}> 
+        // El padding exterior está bien
+        <Box sx={{ px: 3, py: 2 }}>
 
             <Box
                 sx={{
-                    // CAMBIO 1: Usamos 'grid' en todas las resoluciones para eliminar el scroll horizontal.
-                    // Esto resuelve el problema de desbordamiento en ProductsPage.
-                    display: "grid", 
-                    
-                    // Eliminamos overflowX y WebkitOverflowScrolling que causaban el scroll horizontal:
-                    // overflowX: { xs: "scroll", sm: "visible" },
-                    // WebkitOverflowScrolling: "touch",
-                    
-                    // CAMBIO 2: Reducimos el espacio entre los ítems (filas y columnas) a 1 unidad.
-                    // Si 1 es demasiado, puedes probar con 0.5 o 0.
-                    gap: 1, 
-                    
+                    // El display: "grid" es la clave para la cuadrícula responsiva.
+                    display: "grid",
+
+                    // El gap: 1 (8px) es un espacio razonable entre productos.
+                    gap: 1,
+
+                    // APLICAMOS LA LÓGICA RESPONSIVA AUTOMÁTICA
                     gridTemplateColumns: {
-                        // Móviles (xs): 2 columnas
-                        xs: "repeat(2, 1fr)", 
-                        // sm: 2 columnas
-                        sm: "repeat(2, 1fr)",
-                        // md: 4 columnas
-                        md: "repeat(4, 1fr)",
+                        // Usamos la propiedad CSS Grid 'auto-fit' en todas las resoluciones
+                        // para que se creen tantas columnas como sea posible, 
+                      
+                        xs: `repeat(auto-fit, minmax(${MIN_CARD_WIDTH}px, 1fr))`,
                     },
 
+                    // Mantenemos este padding si es necesario
                     pb: { xs: 2, sm: 0 },
                 }}
             >
@@ -79,11 +35,8 @@ export const GridProductsInventory = ({ products = [] }) => {
                     <Box
                         key={product.id}
                         sx={{
-                            // Estos estilos de flex/minWidth ya no son necesarios con display: grid
-                            // flex: { xs: "0 0 80%", sm: "none" },
-                            // minWidth: { xs: "80%", sm: "auto" },
-                            
-                            // Mantenemos las alturas mínimas si son necesarias para el diseño
+                            // Mantenemos las alturas mínimas si son necesarias para el diseño,
+                            // aunque el grid se encargará del ancho.
                             minHeight: { sm: '400px', md: '450px' },
                         }}
                     >
